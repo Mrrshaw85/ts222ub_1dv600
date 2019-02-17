@@ -18,3 +18,18 @@ Features to be done:
 - Highscore list that display the 10 fastest winners (including the number of guesses)
 
 */
+
+// Import the files for the modules
+
+const menu = require('./src/Menu.js')
+
+menu()
+
+
+// Menu 
+
+// 1. Play Standard Game
+
+// 2. Play Hang The Man (extra feature)
+
+// 3. Quit the Application
