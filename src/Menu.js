@@ -17,8 +17,9 @@ const readline = require('readline-sync')
 const version = 'v1.0'
 
 let tempChoice = ''
+let run = true
 
-async function displayMenu () {
+function displayMenu () {
   console.log(`HangTheMan ${version}`)
   console.log('--------MENU-------')
   console.log('1: Play Standard Game')
@@ -26,28 +27,30 @@ async function displayMenu () {
   console.log('3: Quit')
   console.log('-------------------')
 
-  askQuestion()
-}
-
-function askQuestion () {
-  tempChoice = readline.question('Option: ')
-  handleMenu()
-}
-
-function handleMenu () {
-  if (tempChoice === '1') {
-    StandardGame()
-  } else if (tempChoice === '2') {
-    HangTheMan()
-  } else if (tempChoice === '3') {
-    let quit = Quit()
-    if (quit === false) {
-      displayMenu()
+  while (run) {
+    tempChoice = readline.question('Option: ')
+    if (tempChoice === '1') {
+      let backToMain = StandardGame()
+      if (backToMain === true) {
+        displayMenu()
+      } else {
+        return
+      }
+      run = false
+    } else if (tempChoice === '2') {
+      HangTheMan()
+      run = false
+    } else if (tempChoice === '3') {
+      let quit = Quit()
+      if (quit === false) {
+        displayMenu()
+      } else {
+        return
+        run = false
+      }
     } else {
+      console.log('Please select a valid menu item')
     }
-  } else {
-    console.log('Please select a valid menu item')
-    askQuestion()
   }
 }
 
