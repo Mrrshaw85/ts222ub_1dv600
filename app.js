@@ -24,12 +24,3 @@ Features to be done:
 const menu = require('./src/Menu.js')
 
 menu()
-
-
-// Menu 
-
-// 1. Play Standard Game
-
-// 2. Play Hang The Man (extra feature)
-
-// 3. Quit the Application

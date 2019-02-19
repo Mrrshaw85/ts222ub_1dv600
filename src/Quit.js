@@ -2,10 +2,10 @@
 
 const readlineSync = require('readline-sync')
 
-function quitPrompt() {
+function quitPrompt () {
   let yesOrNo = readlineSync.question('Are you sure you want to quit? (Yes or No): ')
   yesOrNo = yesOrNo.toUpperCase()
-  if(yesOrNo === 'YES') {
+  if (yesOrNo === 'YES') {
     return true
   } else if (yesOrNo === 'NO') {
     console.log('')
