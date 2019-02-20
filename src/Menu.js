@@ -46,7 +46,6 @@ function displayMenu () {
         displayMenu()
       } else {
         return
-        run = false
       }
     } else {
       console.log('Please select a valid menu item')

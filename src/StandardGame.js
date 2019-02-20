@@ -2,7 +2,6 @@
 
 const readlineSync = require('readline-sync')
 const Quit = require('./Quit.js')
-const displayMenu = require('./Menu.js')
 
 let wordArray = ['tophat', 'lever', 'fish', 'cat']
 let answerArr = []
@@ -42,7 +41,7 @@ function stdGame () {
           answerArr[j] = currLetter
           remainingLetters--
           notFound = false
-        } 
+        }
       }
       if (notFound && currLetter !== 'quit' && currLetter !== 'main') {
         guessCount++
@@ -53,9 +52,10 @@ function stdGame () {
       console.log('')
       return false
     }
-
   }
-  console.log('You win!')
+  console.log(`You win!`)
+  console.log('')
+  return true
 }
 
 module.exports = stdGame
