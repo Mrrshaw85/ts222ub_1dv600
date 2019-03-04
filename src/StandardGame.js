@@ -13,9 +13,7 @@ let quit = false
 function stdGame () {
   // Randomize
   let word = wordArray[Math.floor(Math.random() * wordArray.length)]
-  for (let i = 0; i < word.length; i++) {
-    answerArr[i] = '_'
-  }
+  createEmptyArr(word)
   let remainingLetters = word.length
 
   while (remainingLetters > 0) {
@@ -34,6 +32,7 @@ function stdGame () {
       quit = Quit()
     } else if (currLetter === 'main') {
       console.log('')
+      clearGameState()
       return true
     } else {
       for (let j = 0; j < word.length; j++) {
@@ -50,12 +49,24 @@ function stdGame () {
     }
     if (quit === true) {
       console.log('')
+      clearGameState()
       return false
     }
   }
   console.log(`You win!`)
   console.log('')
   return true
+}
+
+function createEmptyArr (w) {
+  for (let i = 0; i < w.length; i++) {
+    answerArr[i] = '_'
+  }
+}
+
+function clearGameState () {
+  answerArr = []
+  guessCount = 0
 }
 
 module.exports = stdGame
