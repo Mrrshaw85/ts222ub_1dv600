@@ -3,7 +3,7 @@
 const readlineSync = require('readline-sync')
 const Quit = require('./Quit.js')
 
-let wordArray = ['tophat', 'lever', 'fish', 'cat']
+let wordArray = ['fox', 'leopard', 'stormcloud', 'teddybear', 'galdalf', 'silmarillion', 'budapest', 'jeopardy', 'donkey']
 let answerArr = []
 let maxGuesses = 7
 let guessCount = 0
@@ -13,7 +13,7 @@ let quit = false
 function stdGame () {
   // Randomize
   let word = wordArray[Math.floor(Math.random() * wordArray.length)]
-  createEmptyArr(word)
+  answerArr = createUnderscoreArr(word)
   let remainingLetters = word.length
 
   while (remainingLetters > 0) {
@@ -32,9 +32,8 @@ function stdGame () {
       quit = Quit()
     } else if (currLetter === 'main') {
       console.log('')
-      clearGameState()
-      return true
-    } else {
+      return clearGameState()
+        } else {
       for (let j = 0; j < word.length; j++) {
         if (word[j] === currLetter && answerArr[j] !== currLetter) {
           answerArr[j] = currLetter
@@ -44,6 +43,7 @@ function stdGame () {
       }
       if (notFound && currLetter !== 'quit' && currLetter !== 'main') {
         guessCount++
+        console.log(`Letter ${currLetter} not found.`)
         console.log(`You have ${(maxGuesses - guessCount)} guesses left!`)
       }
     }
@@ -53,20 +53,28 @@ function stdGame () {
       return false
     }
   }
+  clearGameState()
   console.log(`You win!`)
   console.log('')
   return true
 }
 
-function createEmptyArr (w) {
+function createUnderscoreArr (w) {
+  let aArr = []
   for (let i = 0; i < w.length; i++) {
-    answerArr[i] = '_'
+    aArr[i] = '_'
   }
+  return aArr
 }
 
 function clearGameState () {
   answerArr = []
   guessCount = 0
+  return true
 }
 
-module.exports = stdGame
+module.exports = {
+  stdGame: stdGame,
+  clearGameState: clearGameState,
+  createUnderscoreArr: createUnderscoreArr
+}

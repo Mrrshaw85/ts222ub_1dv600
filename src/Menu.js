@@ -1,7 +1,7 @@
 'use standard'
 
 const StandardGame = require('./StandardGame.js')
-const HangTheMan = require('./HangTheMan')
+const HangTheMan = require('./HangTheMan.js')
 const Quit = require('./Quit.js')
 const readline = require('readline-sync')
 
@@ -30,7 +30,7 @@ function displayMenu () {
   while (run) {
     tempChoice = readline.question('Option: ')
     if (tempChoice === '1') {
-      let backToMain = StandardGame()
+      let backToMain = StandardGame.stdGame()
       if (backToMain === true) {
         displayMenu()
       } else {
@@ -38,7 +38,12 @@ function displayMenu () {
       }
       run = false
     } else if (tempChoice === '2') {
-      HangTheMan()
+      let backToMain = HangTheMan.hangTheMan()
+      if (backToMain === true) {
+        displayMenu()
+      } else {
+        return
+      }
       run = false
     } else if (tempChoice === '3') {
       let quit = Quit()

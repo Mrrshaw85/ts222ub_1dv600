@@ -1,25 +1,49 @@
+'use strict'
+
+const stdGame = require('../src/StandardGame.js')
+const quitGame = require('../src/Quit.js')
+const hangTheMan = require('../src/HangTheMan.js')
+
 let assert = require('assert')
-describe('Array', function () {
-  describe('#indexOf()', function () {
-    it('should return -1 when the value is not present', function () {
-      assert.strictEqual(-1, [1, 2, 3].indexOf(4))
+describe('StandardGame (UC2) Testing', function () {
+  describe('#createUnderscoreArr: Create Empty Array with _ for each char', function () {
+    it(`should return ('_','_','_','_','_','_','_','_','_','_')`, function () {
+      let testArr = stdGame.createUnderscoreArr('stormcloud')
+      assert.deepEqual(testArr, (['_','_','_','_','_','_','_','_','_','_']))
+    })
+  }),
+  describe('#clearGameState: Clear the values and return true ', function () {
+    it('should return true ', function () {
+      let shouldBeTrue = false
+      shouldBeTrue = stdGame.clearGameState() 
+      assert.deepEqual(shouldBeTrue, true)
     })
   })
 })
-
-describe('Math', function () {
-  describe('#Is 3*3 = 9?', function () {
-    it('should return 9', function () {
-      assert.strictEqual(9, 3 * 3)
+describe('Play Hang the Man(UC4) Testing', function () {
+  describe('#manGoesFree: console.logs that the man goes free and returns false', function () {
+    it('should return false', function () {
+      let testVal = hangTheMan.manGoesFree()
+      assert.equal(testVal, false)
     })
-  })
-  describe('#Is (3-4)*8 = -8?', function () {
-    it('should return -8', function () {
-      assert.strictEqual(-8, (3 - 4) * 8)
+  }),
+  describe('#rndWordFromArr: Returns a random word from array', function () {
+    it('should return "fox"', function () {
+      let wArr = ['fox']
+      let testRndW = hangTheMan.rndWordFromArr(wArr)
+      assert.equal(testRndW, 'fox')
     })
-  })
-})
-
-describe('Correct Guess', function () {
-  
+  }),
+  describe('#checkFinalAnswer: Should return true if the input to the function is the string "true"', function () {
+    it('should return true', function () {
+      let test = hangTheMan.checkFinalAnswer('true')
+      assert.equal(test, true)
+    })
+  })/*,
+  describe('#checkFinalAnswer2: Should return true if the input to the function is the string "true"', function () {
+    it('should return true', function () {
+      let test = hangTheMan.checkFinalAnswer2('true')
+      assert.equal(test, true)
+    })
+  })*/
 })
