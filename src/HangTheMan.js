@@ -3,7 +3,24 @@
 const readlineSync = require('readline-sync')
 const Quit = require('./Quit.js')
 
-let wordArray = ['fox', 'leopard', 'stormcloud', 'teddybear', 'galdalf', 'silmarillion', 'budapest', 'jeopardy', 'donkey']
+let wordArray = ['fox', 'leopard', 'stormcloud', 'teddybear', 'gandalf', 'silmarillion', 'budapest', 'jeopardy', 'donkey', 'narwhale', 'orca', 'frodo', 'laptop', 'suitcase', 'doorway', 'subway', 'stream']
+let questionArray = [
+  {
+    id: 1,
+    question: 'Does the Dung Beetle navigate through polarized sun- and moonlight? (true or false) ',
+    answer: 'true'
+  },
+  {
+    id: 2,
+    question: 'Is there a bat that actually could suck the blood of humans? (true or false) ',
+    answer: 'true'
+  },
+  {
+    id: 3,
+    question: 'Is it cheaper to fly to Stockholm from Skellefteå, than to take the train? (true or false) ',
+    answer: 'false'
+  }
+]
 let answerArr = []
 let maxGuesses = 7
 let guessCount = 0
@@ -54,36 +71,53 @@ function playHangTheMan () {
       return false
     }
   }
-  let finalAnswer = readlineSync.question('Does the Dung Beetle navigate through polarized sun- and moonlight? (true or false) ')
-  finalAnswer = finalAnswer.toLowerCase()
-  let endValue = checkFinalAnswer2(finalAnswer)
+  let randomQ = rndQuestion(questionArray)
+  console.log('')
+  let fAnswer = readlineSync.question(randomQ.question)
+  fAnswer = fAnswer.toLowerCase()
+  let endValue = checkFinalAnswer2(fAnswer, randomQ)
   return endValue
-  
 }
 
 function manGoesFree () {
   console.log('The man goes free. No one will be hanged today. You lose!')
+  clearGameState()
   return false
 }
- 
+
 function rndWordFromArr (wArr) {
   return wArr[Math.floor(Math.random() * wArr.length)]
 }
 
-function checkFinalAnswer(finalAnswer) {
-  return false
+function rndQuestion (questionArray) {
+  return questionArray[Math.floor(Math.random() * questionArray.length)]
 }
 
-function checkFinalAnswer2(finalAnswer) {
+function checkFinalAnswer2 (finalAnswer, rQ) {
   let returnValue
-  if (finalAnswer === 'true') {
+  if (finalAnswer === rQ.answer) {
     console.log(`Correct! The guilty man hangs! You win!`)
+    console.log('')
+    console.log(' _________')
+    console.log('//        |')
+    console.log('||        |')
+    console.log('||        O')
+    console.log('||       /|')
+    console.log('||       / |')
+    console.log('||')
+    console.log('||')
+    console.log('MMMMMMMMMMMM')
+    console.log('')
+    clearGameState()
     returnValue = true
-  } else if (finalAnswer === 'false') {
+  } else if (finalAnswer !== rQ.answer) {
     console.log('Sorry, the answer was incorrect.')
+    console.log('')
     returnValue = manGoesFree()
   } else {
-    console.log('Sorry your answer as neither true or false. The guilty man escape and you ponder your intelligence.')
+    console.log('Sorry your answer is neither true or false. The guilty man escape and you ponder your intelligence.')
+    console.log('')
+    clearGameState()
     returnValue = false
   }
   return returnValue
@@ -107,7 +141,6 @@ module.exports = {
   clearGameState: clearGameState,
   createUnderscoreArr: createUnderscoreArr,
   rndWordFromArr: rndWordFromArr,
-  checkFinalAnswer: checkFinalAnswer,
   checkFinalAnswer2: checkFinalAnswer2,
   manGoesFree: manGoesFree
 }
